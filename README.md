@@ -6,11 +6,16 @@ This repository contains a **custom Redis-like in-memory key-value store** imple
 
 ## Features  
 
-âœ” **In-Memory Key-Value Store** â€“ Supports basic SET/GET operations  
-âœ” **Pub/Sub Messaging** â€“ Clients can publish and subscribe to messages  
-âœ” **Multi-Client Support** â€“ Handles multiple concurrent clients via threading  
-âœ” **Dockerized** â€“ Can be run in a containerized environment  
-âœ” **Terminal-Based Interaction** â€“ Clients can connect using `telnet`  
+**In-Memory Key-Value Store** 
+“ Supports basic SET/GET operations  
+**Pub/Sub Messaging**
+“ Clients can publish and subscribe to messages  
+**Multi-Client Support**
+“ Handles multiple concurrent clients via threading  
+**Dockerized**
+“ Can be run in a containerized environment  
+**Terminal-Based Interaction**
+“ Clients can connect using `telnet`  
 
 ---
 
@@ -80,11 +85,11 @@ Subscribed to pokemon_news
 Sends a message to all clients subscribed to a specific channel.  
 #### **Usage:**  
 ```sh
-PUB pokemon_news "A new PokÃ©mon game is coming!"
+PUB pokemon_news "A new Pokemon game is coming!"
 ```
 #### **Response for Subscribers:**  
 ```sh
-Message from pokemon_news: A new PokÃ©mon game is coming!
+Message from pokemon_news: A new Pokemon game is coming!
 ```
 
 ---
