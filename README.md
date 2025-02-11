@@ -98,7 +98,7 @@ Message from pokemon_news: A new Pokemon game is coming!
 To run inside a Docker container:  
 ```sh
 docker build -t java-redis .
-docker run -p 8100:8100 java-redis
+docker run -d -p 8100:8100 -v $(pwd)/data:/app/data java-redis
 ```
 Now connect with `telnet localhost 8100` from your host machine.
 

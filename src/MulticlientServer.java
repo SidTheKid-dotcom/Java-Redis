@@ -32,6 +32,7 @@ public class MulticlientServer {
                             if (parts.length == 3) {
                                 String key = parts[1];
                                 String value = parts[2];
+                                FileStorage.saveToFile(key, value);
                                 cache.addEntry(key, value);
                                 out.println("SET command successful.");
                             } else {
@@ -42,8 +43,8 @@ public class MulticlientServer {
                         case "GET":
                             if (parts.length == 2) {
                                 String key = parts[1];
-                                String value = cache.getEntry(key) == null ? null : cache.getEntry(key).toString();
-                                out.println(value != null ? value : "Key not found.");
+                                Object value = cache.getEntry(key);
+                                out.println(value != null ? value.toString() : "Key not found.");
                             } else {
                                 out.println("Invalid GET command. Usage: GET <key>");
                             }
@@ -75,7 +76,10 @@ public class MulticlientServer {
                             out.println("Invalid Command");
                     }
                 }
-            } catch (Exception e) {
+            } catch (SocketException e) {
+                System.out.println("Client disconnected: " + clientSocket.getInetAddress());
+            }
+            catch (Exception e) {
                 e.printStackTrace();
             } finally {
                 try {
@@ -90,6 +94,7 @@ public class MulticlientServer {
     }
 
     public static void startServer() {
+        FileStorage.loadFromFile(cache);
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             System.out.println("Server is running on port: " + PORT);
 
