@@ -32,6 +32,9 @@ public class MulticlientServer {
                             if (parts.length == 3) {
                                 String key = parts[1];
                                 String value = parts[2];
+                                if(key.equals("DELETE")) {
+                                    out.println("Invalid key name");
+                                }
                                 FileStorage.saveToFile(key, value);
                                 cache.addEntry(key, value);
                                 out.println("SET command successful.");
@@ -48,6 +51,26 @@ public class MulticlientServer {
                             } else {
                                 out.println("Invalid GET command. Usage: GET <key>");
                             }
+                            break;
+
+                        case "DEL":
+                            if (parts.length == 2) {
+                                String key = parts[1];
+                                System.out.println(key);
+                                FileStorage.saveToFile("DELETE", key);
+                                // Attempt to remove the key and check if it existed
+                                if (cache.deleteEntry(key)) {
+                                    out.println("Deleted key: " + key);
+                                } else {
+                                    out.println("Key not found.");
+                                }
+                            } else {
+                                out.println("Invalid DEL command. Usage: DEL <key>");
+                            }
+                            break;
+
+                        case "PRINT_CACHE":
+                            cache.display(out);
                             break;
 
                         case "SUB":

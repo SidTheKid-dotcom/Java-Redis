@@ -21,6 +21,9 @@ public class FileStorage {
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("=", 2);
                 if (parts.length == 2) {
+                    if(parts[0].equals("DELETE")) {
+                        cache.deleteEntry(parts[1]);
+                    }
                     cache.addEntry(parts[0], parts[1]);
                 }
             }

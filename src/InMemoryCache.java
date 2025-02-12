@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -55,9 +56,9 @@ public class InMemoryCache {
         }
     }
 
-    void deleteEntry(String key)
+    boolean deleteEntry(String key)
     {
-        cache.remove(key);
+        return cache.remove(key) != null;
     }
 
     Object getEntry(String key) {
@@ -89,11 +90,11 @@ public class InMemoryCache {
         }
     }
 
-    void display()
+    void display(PrintWriter out)
     {
         for(ConcurrentHashMap.Entry<String, CacheEntry> entry : cache.entrySet())
         {
-            System.out.println(entry.getKey()+" "+entry.getValue().value.toString());
+            out.println(entry.getKey()+" "+entry.getValue().value.toString());
         }
     }
 
@@ -107,7 +108,7 @@ public class InMemoryCache {
         cache.addEntry("treeSet", new TreeSet<>(Set.of(10, 5, 20, 15)));
 
         // Display stored data
-        cache.display();
+        //cache.display(PrintWriter out = new PrintWriter());
 
         // Retrieve and cast data
         String strValue = (String) cache.getEntry("stringKey");
