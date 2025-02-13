@@ -1,4 +1,3 @@
-import java.util.*;
 import java.io.*;
 import java.net.*;
 import java.util.function.Consumer;
@@ -35,7 +34,7 @@ public class MulticlientServer {
                                 if(key.equals("DELETE")) {
                                     out.println("Invalid key name");
                                 }
-                                FileStorage.saveToFile(key, value);
+                                FileStorage.saveToFile("data.bd", key, value);
                                 cache.addEntry(key, value);
                                 out.println("SET command successful.");
                             } else {
@@ -57,7 +56,7 @@ public class MulticlientServer {
                             if (parts.length == 2) {
                                 String key = parts[1];
                                 System.out.println(key);
-                                FileStorage.saveToFile("DELETE", key);
+                                FileStorage.saveToFile("data.db", "DELETE", key);
                                 // Attempt to remove the key and check if it existed
                                 if (cache.deleteEntry(key)) {
                                     out.println("Deleted key: " + key);
@@ -117,7 +116,7 @@ public class MulticlientServer {
     }
 
     public static void startServer() {
-        FileStorage.loadFromFile(cache);
+        FileStorage.loadFromFile("data.db", cache);
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             System.out.println("Server is running on port: " + PORT);
 

@@ -1,19 +1,17 @@
 import java.io.*;
-import java.util.*;
 
 public class FileStorage {
-    private static final String DATA_FILE = "data.db";
 
-    public static synchronized void saveToFile(String key, String value) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_FILE, true))) {
+    public static synchronized void saveToFile(String fileName, String key, String value) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
             writer.write(key + "=" + value);
             writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public static void loadFromFile(InMemoryCache cache) {
-        File storageFile = new File(DATA_FILE);
+    public static void loadFromFile(String fileName, InMemoryCache cache) {
+        File storageFile = new File(fileName);
         if (!storageFile.exists()) return;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(storageFile))) {

@@ -20,30 +20,4 @@ public class PubSub<T> {
             subscribers.forEach(subscriber -> subscriber.accept(message));
         }
     }
-
-    public static void main(String[] args) {
-        PubSub<String> pubsub = new PubSub<>();
-
-        Consumer<String> subscriber1 = new Consumer<String>() {
-            @Override
-            public void accept(String s) {
-                System.out.println("Subscriber 1 received: "+s);
-            }
-        };
-        Consumer<String> subscriber2 = new Consumer<String>() {
-            @Override
-            public void accept(String s) {
-                System.out.println("Subscriber 2 received: "+s);
-            }
-        };
-
-        pubsub.subscribe("news", subscriber1);
-        pubsub.subscribe("news", subscriber2);
-
-        pubsub.publish("news", "Breaking News: Java is amazing!");
-
-        pubsub.unsubscribe("news", subscriber1);
-
-        pubsub.publish("news", "More News: Pub/Sub works!");
-    }
 }

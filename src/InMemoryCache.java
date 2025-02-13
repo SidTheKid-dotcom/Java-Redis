@@ -97,33 +97,4 @@ public class InMemoryCache {
             out.println(entry.getKey()+" "+entry.getValue().value.toString());
         }
     }
-
-    public static void main(String[] args) {
-        InMemoryCache cache = new InMemoryCache();
-
-        cache.addEntry("stringKey", "Hello, World!");
-        cache.addEntry("integerArray", new int[]{1, 2, 3, 4, 5});
-        cache.addEntry("arrayList", new ArrayList<>(Arrays.asList("Apple", "Banana", "Cherry")));
-        cache.addEntry("hashMap", new HashMap<>(Map.of("A", 1, "B", 2)));
-        cache.addEntry("treeSet", new TreeSet<>(Set.of(10, 5, 20, 15)));
-
-        // Display stored data
-        //cache.display(PrintWriter out = new PrintWriter());
-
-        // Retrieve and cast data
-        String strValue = (String) cache.getEntry("stringKey");
-        System.out.println("\nRetrieved String: " + strValue);
-
-        int[] intArray = (int[]) cache.getEntry("integerArray");
-        System.out.println("Retrieved Array: " + Arrays.toString(intArray));
-
-        ArrayList<String> arrayList = (ArrayList<String>) cache.getEntry("arrayList");
-        System.out.println("Retrieved ArrayList: " + arrayList);
-
-        HashMap<String, Integer> hashMap = (HashMap<String, Integer>) cache.getEntry("hashMap");
-        System.out.println("Retrieved HashMap: " + hashMap);
-
-        TreeSet<Integer> treeSet = (TreeSet<Integer>) cache.getEntry("treeSet");
-        System.out.println("Retrieved TreeSet: " + treeSet);
-    }
 }
